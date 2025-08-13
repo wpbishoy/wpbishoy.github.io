@@ -10,12 +10,12 @@
 <meta property="og:title" content="Bishoy — WordPress Developer">
 <meta property="og:description" content="Crafting WordPress experiences that inspire, with precision and creativity.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://YOUR-GITHUB-PAGES-URL">
-<meta property="og:image" content="https://YOUR-GITHUB-PAGES-URL/bishoy.jpg">
+<meta property="og:url" content="https://www.bishoy.me">
+<meta property="og:image" content="https://www.bishoy.me/bishoy.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bishoy — WordPress Developer">
 <meta name="twitter:description" content="Crafting WordPress experiences that inspire, with precision and creativity.">
-<meta name="twitter:image" content="https://YOUR-GITHUB-PAGES-URL/bishoy.jpg">
+<meta name="twitter:image" content="https://www.bishoy.me/bishoy.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -53,19 +53,17 @@
         object-fit: cover;
         margin-bottom: 1rem;
     }
-    h1 { font-size: 2rem; color: #ffffff; margin-bottom: 0.5rem; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
     h2 { font-size: 1.2rem; color: #9b5de5; margin-bottom: 1.5rem; }
     .typing {
         font-family: 'Source Code Pro', monospace;
         font-size: 1rem;
         line-height: 1.6;
-        color: #fff;
         white-space: pre-wrap;
         text-align: center;
         display: inline-block;
         max-width: 800px;
         min-height: 6em;
-        box-sizing: border-box;
     }
     .cursor {
         display: inline-block;
@@ -126,6 +124,84 @@
         font-size: 0.75rem;
         color: rgba(255,255,255,0.5);
     }
+    /* Overlay form */
+    #hire-form-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+        z-index: 9999;
+    }
+    #hire-form-overlay.active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .form-container {
+        background: #0a0a0a;
+        border: 2px solid #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 0 20px rgba(0,247,255,0.5);
+        animation: slideUp 0.4s ease;
+    }
+    @keyframes slideUp {
+        from { transform: translateY(50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    #close-form {
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 1.5rem;
+        float: right;
+        cursor: pointer;
+    }
+    .form-container h3 {
+        font-family: 'Source Code Pro', monospace;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #fff;
+        background: transparent;
+        color: #fff;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 1rem;
+        outline: none;
+    }
+    .form-container textarea {
+        min-height: 150px;
+    }
+    .form-container input:focus,
+    .form-container textarea:focus {
+        border-color: #9b5de5;
+    }
+    .form-container button {
+        background: #fff;
+        color: #000;
+        border: none;
+        padding: 0.8rem 1.2rem;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.7rem;
+        width: 100%;
+    }
+    .form-container button:hover {
+        background: #00c7cc;
+    }
     @media (max-width: 900px) { .typing { max-width: 100%; } }
     @media (max-width: 600px) {
         h1 { font-size: 1.6rem; }
@@ -145,7 +221,7 @@
     <h2>WordPress Developer & Code Crafter</h2>
     <p class="typing"><span id="typing-text"></span><span class="cursor"></span></p>
     <div class="button-group">
-        <a href="https://app.codeable.io/tasks/new?preferredContractor=77894" id="cta-btn" class="cta-btn">
+        <a href="#contact" id="cta-btn" class="cta-btn">
             <svg viewBox="0 0 32 32" fill="black" xmlns="http://www.w3.org/2000/svg">
                 <rect x="6" y="10" width="20" height="14" stroke="black" stroke-width="2" fill="none"/>
                 <rect x="12" y="6" width="8" height="4" fill="black"/>
@@ -168,6 +244,20 @@
     <p id="teaser" class="teaser-text"></p>
 </header>
 
+<!-- Hire Me Form Overlay -->
+<div id="hire-form-overlay">
+    <div class="form-container">
+        <button id="close-form">✖</button>
+        <h3>Let’s Work Together</h3>
+        <form action="https://formspree.io/f/mgvzqevd" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="_replyto" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</div>
+
 <footer>
     © 2025 Bishoy — Crafted with code & coffee.
     <div class="footer-note">Made on Earth</div>
@@ -179,6 +269,8 @@ I thrive on solving the tough problems, the ones that demand patience, creativit
     const typingText = document.getElementById("typing-text");
     const teaserEl = document.getElementById("teaser");
     const hireBtn = document.getElementById("cta-btn");
+    const hireFormOverlay = document.getElementById('hire-form-overlay');
+    const closeFormBtn = document.getElementById('close-form');
     const keyMap = { q:['w','a'],w:['q','e','a','s'],e:['w','r','s','d'],r:['e','t','d','f'],t:['r','y','f','g'],y:['t','u','g','h'],u:['y','i','h','j'],i:['u','o','j','k'],o:['i','p','k','l'],p:['o','l'],a:['q','w','s','z'],s:['w','e','a','d','z','x'],d:['e','r','s','f','x','c'],f:['r','t','d','g','c','v'],g:['t','y','f','h','v','b'],h:['y','u','g','j','b','n'],j:['u','i','h','k','n','m'],k:['i','o','j','l','m'],l:['o','p','k'],z:['a','s','x'],x:['s','d','z','c'],c:['d','f','x','v'],v:['f','g','c','b'],b:['g','h','v','n'],n:['h','j','b','m'],m:['j','k','n'] };
     let index = 0;
     let mistakeIndex = Math.random() < 0.5 ? Math.floor(Math.random() * (text.length - 5)) + 3 : null;
@@ -232,6 +324,20 @@ I thrive on solving the tough problems, the ones that demand patience, creativit
             teaserShown = true;
         }
     });
+    // Show/hide form overlay
+    hireBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hireFormOverlay.classList.add('active');
+    });
+    closeFormBtn.addEventListener('click', () => {
+        hireFormOverlay.classList.remove('active');
+    });
+    hireFormOverlay.addEventListener('click', (e) => {
+        if (e.target === hireFormOverlay) {
+            hireFormOverlay.classList.remove('active');
+        }
+    });
+    // Background particles
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
     let particles = [];

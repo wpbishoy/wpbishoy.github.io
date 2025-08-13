@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Sent — Bishoy</title>
+<meta name="description" content="Your message has been sent to Bishoy. Thank you for getting in touch!">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+        font-family: 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    #particles {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -1;
+        background: radial-gradient(circle at top, #040409 0%, #050e39 100%);
+    }
+    .icon {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1.5rem;
+        animation: pop 0.6s ease-out;
+    }
+    @keyframes pop {
+        0% { transform: scale(0); opacity: 0; }
+        70% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); }
+    }
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #00f7ff;
+    }
+    p {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.8);
+        max-width: 500px;
+        margin: 0 auto 2rem;
+    }
+    a {
+        display: inline-block;
+        padding: 0.8rem 1.4rem;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.7rem;
+        background: #00f7ff;
+        color: #000;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.1s ease;
+    }
+    a:hover {
+        background: #00c7cc;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- Big checkmark SVG -->
+<svg class="icon" viewBox="0 0 64 64" fill="none" stroke="#00f7ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="32" cy="32" r="30" stroke="#00f7ff" fill="none"/>
+    <path d="M18 34l8 8 20-20" stroke="#00f7ff"/>
+</svg>
+
+<h1>Message Sent!</h1>
+<p>Message received! It’s now in my inbox, right next to my coffee mug. I’ll reply before the coffee gets cold.</p>
+
+<a href="https://www.bishoy.me">← Back to Home</a>
+
+<script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let shootingStars = [];
+    let nextShootingStarTime = Date.now() + randomInterval();
+
+    function randomInterval() { return 3000 + Math.random() * 7000; }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2,
+                dx: (Math.random() - 0.5) * 0.5,
+                dy: (Math.random() - 0.5) * 0.5
+            });
+        }
+    }
+    function drawParticles() {
+        ctx.fillStyle = "#00f7ff";
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+    function updateParticles() {
+        particles.forEach(p => {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        });
+    }
+    function createShootingStar() {
+        const startX = Math.random() * canvas.width;
+        const startY = Math.random() * (canvas.height / 2);
+        const speed = 8 + Math.random() * 4;
+        const length = 150 + Math.random() * 100;
+        shootingStars.push({
+            x: startX,
+            y: startY,
+            dx: speed,
+            dy: speed * (Math.random() * 0.3 + 0.2),
+            length: length,
+            alpha: 1
+        });
+    }
+    function updateShootingStars() {
+        const now = Date.now();
+        if (now >= nextShootingStarTime) {
+            createShootingStar();
+            nextShootingStarTime = now + randomInterval();
+        }
+        shootingStars.forEach(star => {
+            star.x += star.dx;
+            star.y += star.dy;
+            star.alpha -= 0.02;
+        });
+        shootingStars = shootingStars.filter(star => star.alpha > 0);
+    }
+    function drawShootingStars() {
+        shootingStars.forEach(star => {
+            const grad = ctx.createLinearGradient(
+                star.x, star.y,
+                star.x - star.length, star.y - star.length * (star.dy / star.dx)
+            );
+            grad.addColorStop(0, `rgba(0,247,255,${star.alpha})`);
+            grad.addColorStop(1, `rgba(0,247,255,0)`);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(
+                star.x - star.length,
+                star.y - star.length * (star.dy / star.dx)
+            );
+            ctx.stroke();
+        });
+    }
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        updateParticles();
+        drawParticles();
+        updateShootingStars();
+        drawShootingStars();
+        requestAnimationFrame(animate);
+    }
+    window.addEventListener("resize", () => {
+        resizeCanvas();
+        initParticles();
+    });
+    resizeCanvas();
+    initParticles();
+    animate();
+</script>
+
+</body>
+</html>
