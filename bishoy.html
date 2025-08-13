@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bishoy — WordPress Developer</title>
+<meta name="description" content="Bishoy is a WordPress developer crafting high-quality, inspiring experiences with precision and creativity.">
+<meta name="keywords" content="WordPress Developer, Web Developer, Freelance Developer, Custom WordPress, PHP, HTML, CSS, JavaScript">
+<meta name="author" content="Bishoy">
+<meta property="og:title" content="Bishoy — WordPress Developer">
+<meta property="og:description" content="Crafting WordPress experiences that inspire, with precision and creativity.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOUR-GITHUB-PAGES-URL">
+<meta property="og:image" content="https://YOUR-GITHUB-PAGES-URL/bishoy.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bishoy — WordPress Developer">
+<meta name="twitter:description" content="Crafting WordPress experiences that inspire, with precision and creativity.">
+<meta name="twitter:image" content="https://YOUR-GITHUB-PAGES-URL/bishoy.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+        font-family: 'Fira Code', monospace;
+        background: #0a0a0a;
+        color: #fff;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    #particles {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -1;
+        background: radial-gradient(circle at top, #040409 0%, #050e39 100%);
+    }
+    header {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        text-align: center;
+    }
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #ffffff;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+    h1 { font-size: 2rem; color: #ffffff; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.2rem; color: #9b5de5; margin-bottom: 1.5rem; }
+    .typing {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #fff;
+        white-space: pre-wrap;
+        text-align: center;
+        display: inline-block;
+        max-width: 800px;
+        min-height: 6em;
+        box-sizing: border-box;
+    }
+    .cursor {
+        display: inline-block;
+        width: 0.6em;
+        height: 1em;
+        background: #fff;
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .cta-btn, .coffee-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.4rem;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.7rem;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .cta-btn { background: #ffffff; color: #000; }
+    .cta-btn:hover { background: #00c7cc; transform: scale(1.05); }
+    .coffee-btn { background: #ffcc00; color: #000; }
+    .coffee-btn:hover { background: #e6b800; transform: scale(1.05); }
+    .cta-btn svg, .coffee-btn svg { width: 28px; height: 28px; image-rendering: pixelated; }
+    .teaser-text {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.75);
+        max-width: 600px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+    .teaser-text.show { opacity: 1; }
+    footer {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.6);
+        border-top: 1px solid #222;
+    }
+    .footer-note {
+        margin-top: 0.3rem;
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.5);
+    }
+    @media (max-width: 900px) { .typing { max-width: 100%; } }
+    @media (max-width: 600px) {
+        h1 { font-size: 1.6rem; }
+        h2 { font-size: 1rem; }
+        .typing { font-size: 0.9rem; }
+        .profile-photo { width: 120px; height: 120px; }
+    }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+    <img src="bishoy.jpg" alt="Bishoy profile photo" class="profile-photo">
+    <h1>Hi, I’m Bishoy</h1>
+    <h2>WordPress Developer & Code Crafter</h2>
+    <p class="typing"><span id="typing-text"></span><span class="cursor"></span></p>
+    <div class="button-group">
+        <a href="#contact" id="cta-btn" class="cta-btn">
+            <svg viewBox="0 0 32 32" fill="black" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="10" width="20" height="14" stroke="black" stroke-width="2" fill="none"/>
+                <rect x="12" y="6" width="8" height="4" fill="black"/>
+                <rect x="14" y="14" width="4" height="2" fill="black"/>
+            </svg>
+            HIRE ME
+        </a>
+        <a href="https://buymeacoffee.com/bishoy" target="_blank" class="coffee-btn" rel="noopener">
+            <svg viewBox="0 0 32 32" fill="black" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="12" width="12" height="8" stroke="black" stroke-width="2" fill="none"/>
+                <rect x="20" y="14" width="4" height="4" stroke="black" stroke-width="2" fill="none"/>
+                <rect x="10" y="20" width="8" height="2" fill="black"/>
+                <rect x="12" y="8" width="2" height="2" fill="black"/>
+                <rect x="16" y="6" width="2" height="2" fill="black"/>
+                <rect x="14" y="4" width="2" height="2" fill="black"/>
+            </svg>
+            BUY ME A COFFEE
+        </a>
+    </div>
+    <p id="teaser" class="teaser-text"></p>
+</header>
+
+<footer>
+    © 2025 Bishoy — Crafted with code & coffee.
+    <div class="footer-note">Made on Earth</div>
+</footer>
+
+<script>
+    const text = `I’ve spent more than a decade building WordPress experiences that don’t just function, they inspire.
+I thrive on solving the tough problems, the ones that demand patience, creativity, and precision — because there’s nothing more rewarding than watching a complex puzzle fall perfectly into place.`;
+    const typingText = document.getElementById("typing-text");
+    const teaserEl = document.getElementById("teaser");
+    const hireBtn = document.getElementById("cta-btn");
+    const keyMap = { q:['w','a'],w:['q','e','a','s'],e:['w','r','s','d'],r:['e','t','d','f'],t:['r','y','f','g'],y:['t','u','g','h'],u:['y','i','h','j'],i:['u','o','j','k'],o:['i','p','k','l'],p:['o','l'],a:['q','w','s','z'],s:['w','e','a','d','z','x'],d:['e','r','s','f','x','c'],f:['r','t','d','g','c','v'],g:['t','y','f','h','v','b'],h:['y','u','g','j','b','n'],j:['u','i','h','k','n','m'],k:['i','o','j','l','m'],l:['o','p','k'],z:['a','s','x'],x:['s','d','z','c'],c:['d','f','x','v'],v:['f','g','c','b'],b:['g','h','v','n'],n:['h','j','b','m'],m:['j','k','n'] };
+    let index = 0;
+    let mistakeIndex = Math.random() < 0.5 ? Math.floor(Math.random() * (text.length - 5)) + 3 : null;
+    let madeMistake = false;
+    function type() {
+        if (index < text.length) {
+            const currentChar = text.charAt(index);
+            if (mistakeIndex !== null && index === mistakeIndex && !madeMistake && /[a-zA-Z]/.test(currentChar)) {
+                madeMistake = true;
+                const lowerChar = currentChar.toLowerCase();
+                let wrongChar = lowerChar;
+                if (keyMap[lowerChar]) {
+                    const options = keyMap[lowerChar];
+                    wrongChar = options[Math.floor(Math.random() * options.length)];
+                }
+                typingText.textContent += wrongChar;
+                setTimeout(() => {
+                    typingText.textContent = typingText.textContent.slice(0, -1);
+                    setTimeout(() => {
+                        typingText.textContent += currentChar;
+                        index++;
+                        setTimeout(type, randomDelay(currentChar));
+                    }, 300);
+                }, 400);
+                return;
+            }
+            typingText.textContent += currentChar;
+            index++;
+            setTimeout(type, randomDelay(currentChar));
+        }
+    }
+    function randomDelay(char) {
+        let delay = 18 + Math.random() * 50;
+        if (char === ' ') delay += 80;
+        if (",.;!?".includes(char)) delay += 150;
+        return delay;
+    }
+    type();
+    const teasers = [
+        "There’s a unique thrill in untangling a complex problem — like finding the last piece of a puzzle.",
+        "I find pure satisfaction in turning complexity into clarity and challenges into clean solutions.",
+        "Every tricky bug is just a hidden opportunity waiting to click into place.",
+        "Complex problems don’t intimidate me — they motivate me.",
+        "The moment a solution works flawlessly is the best part of my craft."
+    ];
+    teaserEl.textContent = teasers[Math.floor(Math.random() * teasers.length)];
+    let teaserShown = false;
+    hireBtn.addEventListener('mouseenter', () => {
+        if (!teaserShown) {
+            teaserEl.classList.add('show');
+            teaserShown = true;
+        }
+    });
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let shootingStars = [];
+    let nextShootingStarTime = Date.now() + randomInterval();
+    function randomInterval() { return 3000 + Math.random() * 7000; }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2,
+                dx: (Math.random() - 0.5) * 0.5,
+                dy: (Math.random() - 0.5) * 0.5
+            });
+        }
+    }
+    function drawParticles() {
+        ctx.fillStyle = "#00f7ff";
+        particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+    function updateParticles() {
+        particles.forEach(p => {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        });
+    }
+    function createShootingStar() {
+        const startX = Math.random() * canvas.width;
+        const startY = Math.random() * (canvas.height / 2);
+        const speed = 8 + Math.random() * 4;
+        const length = 150 + Math.random() * 100;
+        shootingStars.push({
+            x: startX,
+            y: startY,
+            dx: speed,
+            dy: speed * (Math.random() * 0.3 + 0.2),
+            length: length,
+            alpha: 1
+        });
+    }
+    function updateShootingStars() {
+        const now = Date.now();
+        if (now >= nextShootingStarTime) {
+            createShootingStar();
+            nextShootingStarTime = now + randomInterval();
+        }
+        shootingStars.forEach(star => {
+            star.x += star.dx;
+            star.y += star.dy;
+            star.alpha -= 0.02;
+        });
+        shootingStars = shootingStars.filter(star => star.alpha > 0);
+    }
+    function drawShootingStars() {
+        shootingStars.forEach(star => {
+            const grad = ctx.createLinearGradient(
+                star.x, star.y,
+                star.x - star.length, star.y - star.length * (star.dy / star.dx)
+            );
+            grad.addColorStop(0, `rgba(0,247,255,${star.alpha})`);
+            grad.addColorStop(1, `rgba(0,247,255,0)`);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(
+                star.x - star.length,
+                star.y - star.length * (star.dy / star.dx)
+            );
+            ctx.stroke();
+        });
+    }
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        updateParticles();
+        drawParticles();
+        updateShootingStars();
+        drawShootingStars();
+        requestAnimationFrame(animate);
+    }
+    window.addEventListener("resize", () => {
+        resizeCanvas();
+        initParticles();
+    });
+    resizeCanvas();
+    initParticles();
+    animate();
+</script>
+
+</body>
+</html>
