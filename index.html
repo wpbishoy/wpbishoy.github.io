@@ -209,6 +209,37 @@
         .typing { font-size: 0.9rem; }
         .profile-photo { width: 120px; height: 120px; }
     }
+    .tools-section {
+        text-align: center;
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: rgba(255,255,255,0.05);
+        border-top: 1px solid #222;
+        border-bottom: 1px solid #222;
+    }
+    .tools-section h3 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        color: #00c7cc;
+    }
+    .tools-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .tools-section li {
+        margin: 0.5rem 0;
+    }
+    .tools-section a {
+        color: #fff;
+        text-decoration: none;
+        font-family: 'Source Code Pro', monospace;
+        transition: color 0.2s ease;
+    }
+    .tools-section a:hover {
+        color: #00c7cc;
+    }
 </style>
 </head>
 <body>
@@ -257,6 +288,14 @@
         </form>
     </div>
 </div>
+
+<section class="tools-section">
+  <h3>Tools</h3>
+  <ul>
+    <li><a href="password-generator.html">Password Generator</a></li>
+    <!-- Future tools can be added here -->
+  </ul>
+</section>
 
 <footer>
     © 2025 Bishoy — Crafted with code & coffee.
